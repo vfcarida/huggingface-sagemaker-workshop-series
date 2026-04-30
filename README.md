@@ -1,133 +1,109 @@
-# Workshop: Enterprise-Scale NLP with Hugging Face & Amazon SageMaker
+# Enterprise-Scale NLP with Hugging Face & Amazon SageMaker
 
-![](./imgs/cover.png)
+![Hugging Face & Amazon SageMaker](./imgs/cover.png)
 
-Earlier this year we announced a strategic collaboration with Amazon to make it easier for companies to use Hugging Face Transformers in Amazon SageMaker, and ship cutting-edge Machine Learning features faster. We introduced new Hugging Face Deep Learning Containers (DLCs) to train and deploy Hugging Face Transformers in Amazon SageMaker.
+This repository contains a comprehensive set of resources and code demonstrations for building, training, deploying, scaling, and monitoring enterprise-scale Natural Language Processing (NLP) models using Hugging Face Transformers and Amazon SageMaker.
 
-In addition to the Hugging Face Inference DLCs, we created a [Hugging Face Inference Toolkit for SageMaker](https://github.com/aws/sagemaker-huggingface-inference-toolkit). This Inference Toolkit leverages the `pipelines` from the `transformers` library to allow zero-code deployments of models, without requiring any code for pre-or post-processing. 
+This repository serves as an extensive portfolio of advanced Machine Learning Engineering and MLOps practices on AWS.
 
-In October and November, we held a workshop series on “**Enterprise-Scale NLP with Hugging Face & Amazon SageMaker**”. This workshop series consisted out of 3 parts and covers:
+## 📌 Table of Contents
+- [Overview](#overview)
+- [Architecture & Workshops](#architecture--workshops)
+  - [1. Getting Started with Amazon SageMaker](#1-getting-started-with-amazon-sagemaker)
+  - [2. Going to Production](#2-going-to-production)
+  - [3. MLOps End-to-End Pipeline](#3-mlops-end-to-end-pipeline)
+  - [4. Distillation and Acceleration](#4-distillation-and-acceleration)
+- [Getting Started (AWS Setup)](#getting-started-aws-setup)
+- [License](#license)
 
-- Getting Started with Amazon SageMaker: Training your first NLP Transformer model with Hugging Face and deploying it
-- Going Production: Deploying, Scaling & Monitoring Hugging Face Transformer models with Amazon SageMaker
-- MLOps: End-to-End Hugging Face Transformers with the Hub & SageMaker Pipelines
+## 🚀 Overview
 
-We recorded all of them so you are now able to do the whole workshop series on your own to enhance your Hugging Face Transformers skills with Amazon SageMaker or vice-versa. 
+Through a strategic collaboration between Hugging Face and Amazon, it has become easier than ever to train and deploy Hugging Face Transformers using Amazon SageMaker. 
+This project leverages **Hugging Face Deep Learning Containers (DLCs)** and the **Hugging Face Inference Toolkit** for SageMaker to enable zero-code deployments of cutting-edge models.
 
-Below you can find all the details of each workshop and how to get started. 
-
-🧑🏻‍💻 Github Repository: https://github.com/philschmid/huggingface-sagemaker-workshop-series
-
-📺  Youtube Playlist: [https://www.youtube.com/playlist?list=PLo2EIpI_JMQtPhGR5Eo2Ab0_Vb89XfhDJ](https://www.youtube.com/playlist?list=PLo2EIpI_JMQtPhGR5Eo2Ab0_Vb89XfhDJ)
-
- *Note: The Repository contains instructions on how to access a temporary AWS, which was available during the workshops. To be able to do the workshop now you need to use your own or your company AWS Account.*
- 
-In Addition to the workshop we created a fully dedicated [Documentation](https://huggingface.co/docs/sagemaker/main) for Hugging Face and Amazon SageMaker, which includes all the necessary information.
-If the workshop is not enough for you we also have 15 additional getting samples [Notebook Github repository](https://github.com/huggingface/notebooks/tree/master/sagemaker), which cover topics like distributed training or leveraging [Spot Instances](https://aws.amazon.com/ec2/spot/?nc1=h_ls&cards.sort-by=item.additionalFields.startDateTime&cards.sort-order=asc).
- 
-
-## Workshop 1: **Getting Started with Amazon SageMaker: Training your first NLP Transformer model with Hugging Face and deploying it**
-
-In Workshop 1 you will learn how to use Amazon SageMaker to train a Hugging Face Transformer model and deploy it afterwards.
-
-- Prepare and upload a test dataset to S3
-- Prepare a fine-tuning script to be used with Amazon SageMaker Training jobs
-- Launch a training job and store the trained model into S3
-- Deploy the model after successful training
+### Key Technologies Demonstrated:
+- **Hugging Face Transformers**: `transformers`, `datasets`, `tokenizers`
+- **Amazon SageMaker**: Training Jobs, Real-time Endpoints, Batch Transform, Spot Instances, Pipelines (MLOps)
+- **AWS Inferentia**: Accelerating deep learning inference
+- **Optimization**: Knowledge Distillation, AWS Neuron
 
 ---
 
-🧑🏻‍💻 Code Assets: [https://github.com/philschmid/huggingface-sagemaker-workshop-series/tree/main/workshop_1_getting_started_with_amazon_sagemaker](https://github.com/philschmid/huggingface-sagemaker-workshop-series/tree/main/workshop_1_getting_started_with_amazon_sagemaker)
+## 🏗 Architecture & Workshops
 
-📺 Youtube: [https://www.youtube.com/watch?v=pYqjCzoyWyo&list=PLo2EIpI_JMQtPhGR5Eo2Ab0_Vb89XfhDJ&index=6&t=5s&ab_channel=HuggingFace](https://www.youtube.com/watch?v=pYqjCzoyWyo&list=PLo2EIpI_JMQtPhGR5Eo2Ab0_Vb89XfhDJ&index=6&t=5s&ab_channel=HuggingFace)
+The repository is structured into four core areas, moving from initial experimentation to advanced MLOps and hardware optimization.
 
-## Workshop 2: **Going Production: Deploying, Scaling & Monitoring Hugging Face Transformer models with Amazon SageMaker**
+### 1. Getting Started with Amazon SageMaker
+**Folder**: [`workshop_1_getting_started_with_amazon_sagemaker/`](./workshop_1_getting_started_with_amazon_sagemaker/)
 
-In Workshop 2 learn how to use Amazon SageMaker to deploy, scale & monitor your Hugging Face Transformer models for production workloads.
+Learn how to use Amazon SageMaker to train a Hugging Face Transformer model and deploy it.
+- **Data Preparation**: Prepare and upload a test dataset to S3.
+- **Fine-Tuning**: Prepare a fine-tuning script for SageMaker Training jobs.
+- **Training**: Launch a training job, utilize Spot Instances for cost savings, and store the trained model into S3.
+- **Deployment**: Deploy the model to a real-time SageMaker endpoint.
 
-- Run Batch Prediction on JSON files using a Batch Transform
-- Deploy a model from [hf.co/models](https://hf.co/models) to Amazon SageMaker and run predictions
-- Configure autoscaling for the deployed model
-- Monitor the model to see avg. request time and set up alarms
+### 2. Going to Production
+**Folder**: [`workshop_2_going_production/`](./workshop_2_going_production/)
+
+Deploy, scale, and monitor Hugging Face Transformer models for production workloads.
+- **Batch Inference**: Run predictions on large datasets using SageMaker Batch Transform.
+- **Zero-Code Deployment**: Deploy a model directly from the Hugging Face Hub to SageMaker.
+- **Auto-Scaling**: Configure dynamic autoscaling for deployed models based on traffic.
+- **Monitoring**: Track model performance (avg. request time) and set up CloudWatch alarms.
+
+### 3. MLOps End-to-End Pipeline
+**Folder**: [`workshop_3_mlops/`](./workshop_3_mlops/)
+
+Build an End-to-End MLOps Pipeline for Hugging Face Transformers from training to production.
+- **SageMaker Pipelines**: Automate the entire ML lifecycle.
+- **Data Processing**: Preprocess data and upload it to S3 as part of the pipeline.
+- **Model Training**: Fine-tune a model conditionally.
+- **Evaluation & Deployment**: Evaluate the model against a test set and conditionally deploy it only if it exceeds a performance threshold.
+
+### 4. Distillation and Acceleration
+**Folder**: [`workshop_4_distillation_and_acceleration/`](./workshop_4_distillation_and_acceleration/)
+
+Optimize models for ultra-low latency inference using Knowledge Distillation and AWS Inferentia.
+- **Knowledge Distillation**: Compress a large model (BERT-large) to a smaller student model (MiniLM).
+- **AWS Neuron**: Compile a Hugging Face Transformer model for AWS Inferentia hardware.
+- **High-Performance Deployment**: Deploy the distilled and optimized model for a 20x latency improvement.
 
 ---
 
-🧑🏻‍💻 Code Assets: [https://github.com/philschmid/huggingface-sagemaker-workshop-series/tree/main/workshop_2_going_production](https://github.com/philschmid/huggingface-sagemaker-workshop-series/tree/main/workshop_2_going_production)
+## ⚙️ Getting Started (AWS Setup)
 
-📺 Youtube: [https://www.youtube.com/watch?v=whwlIEITXoY&list=PLo2EIpI_JMQtPhGR5Eo2Ab0_Vb89XfhDJ&index=6&t=61s](https://www.youtube.com/watch?v=whwlIEITXoY&list=PLo2EIpI_JMQtPhGR5Eo2Ab0_Vb89XfhDJ&index=6&t=61s)
+To run the notebooks and code in this repository, you will need access to an AWS Account with permissions to use Amazon SageMaker.
 
-## Workshop 3: **MLOps: End-to-End Hugging Face Transformers with the Hub & SageMaker Pipelines**
+### Prerequisites
 
-In Workshop 3 learn how to build an End-to-End MLOps Pipeline for Hugging Face Transformers from training to production using Amazon SageMaker.
+1. **AWS Account**: You must have an active AWS account.
+2. **IAM Roles**: Create an IAM Execution Role for SageMaker with the following policies:
+   - `AmazonSageMakerFullAccess`
+   - `AmazonS3FullAccess` (Or restrict to the specific S3 buckets you will use)
 
-We are going to create an automated SageMaker Pipeline which:
+### Setup Instructions
 
-- processes a dataset and uploads it to s3
-- fine-tunes a Hugging Face Transformer model with the processed dataset
-- evaluates the model against an evaluation set
-- deploys the model if it performed better than a certain threshold
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/huggingface-sagemaker-workshop-series.git
+   cd huggingface-sagemaker-workshop-series
+   ```
 
----
+2. **Install Dependencies** (Local Environment / SageMaker Studio Lab):
+   Create a virtual environment and install the required packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-🧑🏻‍💻 Code Assets: [https://github.com/philschmid/huggingface-sagemaker-workshop-series/tree/main/workshop_3_mlops](https://github.com/philschmid/huggingface-sagemaker-workshop-series/tree/main/workshop_3_mlops)
+3. **Amazon SageMaker Notebook Instance**:
+   Alternatively, you can run these notebooks directly on a SageMaker Notebook Instance:
+   - Go to the Amazon SageMaker Console.
+   - Click **Notebook Instances** -> **Create notebook instance**.
+   - Attach your IAM Role and ensure the volume size is large enough (e.g., 50GB+).
+   - Under **Git repositories**, you can provide the link to this repository to have it cloned automatically upon creation.
 
-📺 Youtube: [https://www.youtube.com/watch?v=XGyt8gGwbY0&list=PLo2EIpI_JMQtPhGR5Eo2Ab0_Vb89XfhDJ&index=7](https://www.youtube.com/watch?v=XGyt8gGwbY0&list=PLo2EIpI_JMQtPhGR5Eo2Ab0_Vb89XfhDJ&index=7)
+4. **Run the Notebooks**:
+   Open JupyterLab, navigate to the desired workshop folder, select the `conda_pytorch_p39` (or similar PyTorch kernel), and start running the cells!
 
-# Access Workshop AWS Account
-
-For this workshop you’ll get access to a temporary AWS Account already pre-configured with Amazon SageMaker Notebook Instances. Follow the steps in this section to login to your AWS Account and download the workshop material.
-
-
-### 1. To get started navigate to - https://dashboard.eventengine.run/login 
-
-![setup1](./imgs/setup1.png)
-
-Click on Accept Terms & Login
-
-### 2. Click on Email One-Time OTP (Allow for up to 2 mins to receive the passcode)
-
-![setup2](./imgs/setup2.png)
-
-### 3. Provide your email address
-
-![setup3](./imgs/setup3.png)
-
-### 4. Enter your OTP code
-
-![setup4](./imgs/setup4.png)
-
-### 5. Click on AWS Console
-
-![setup5](./imgs/setup5.png)
-
-### 6. Click on Open AWS Console
-
-![setup6](./imgs/setup6.png)
-
-### 7. In the AWS Console click on Amazon SageMaker
-
-![setup7](./imgs/setup7.png)
-
-### 8. Click on Notebook and then on Notebook instances 
-
-![setup8](./imgs/setup8.png)
-
-### 9. Create a new Notebook instance
-
-![setup9](./imgs/setup9.png)
-
-### 10. Configure Notebook instances
-
-* Make sure to increase the Volume Size of the Notebook if you want to work with big models and datasets
-* Add your IAM_Role with permissions to run your SageMaker Training And Inference Jobs
-* Add the Workshop Github Repository to the Notebook to preload the notebooks: `https://github.com/philschmid/huggingface-sagemaker-workshop-series.git`
-
-![setup10](./imgs/setup10.png)
-
-
-### 11. Open the Lab and select the right kernel you want to do and have fun!  
-
-Open the workshop you want to do (`workshop_1_getting_started_with_amazon_sagemaker/`) and select the pytorch kernel
-
-![setup11](./imgs/setup11.png)
-
+## 📄 License
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.

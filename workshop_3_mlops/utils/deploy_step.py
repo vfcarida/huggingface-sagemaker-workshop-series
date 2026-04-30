@@ -30,7 +30,9 @@ class ModelDeployment(StepCollection):
         current_time = time.strftime("%m-%d-%H-%M-%S", time.localtime())
 
         steps = []
-        lambda_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "deploy_handler.py")
+        lambda_file = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "deploy_handler.py"
+        )
         # Lambda helper class can be used to create the Lambda function
         self.func = Lambda(
             function_name=f"{self.name}-{current_time}",
@@ -44,9 +46,15 @@ class ModelDeployment(StepCollection):
         # The dictionary retured by the Lambda function is captured by LambdaOutput, each key in the dictionary corresponds to a
         # LambdaOutput
 
-        output_param_1 = LambdaOutput(output_name="statusCode", output_type=LambdaOutputTypeEnum.String)
-        output_param_2 = LambdaOutput(output_name="body", output_type=LambdaOutputTypeEnum.String)
-        output_param_3 = LambdaOutput(output_name="other_key", output_type=LambdaOutputTypeEnum.String)
+        output_param_1 = LambdaOutput(
+            output_name="statusCode", output_type=LambdaOutputTypeEnum.String
+        )
+        output_param_2 = LambdaOutput(
+            output_name="body", output_type=LambdaOutputTypeEnum.String
+        )
+        output_param_3 = LambdaOutput(
+            output_name="other_key", output_type=LambdaOutputTypeEnum.String
+        )
 
         # The inputs provided to the Lambda function can be retrieved via the `event` object within the `lambda_handler` function
         # in the Lambda
@@ -93,11 +101,13 @@ class ModelDeployment(StepCollection):
             role_arn = response["Role"]["Arn"]
 
             response = iam.attach_role_policy(
-                RoleName=role_name, PolicyArn="arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                RoleName=role_name,
+                PolicyArn="arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
             )
 
             response = iam.attach_role_policy(
-                PolicyArn="arn:aws:iam::aws:policy/AmazonSageMakerFullAccess", RoleName=role_name
+                PolicyArn="arn:aws:iam::aws:policy/AmazonSageMakerFullAccess",
+                RoleName=role_name,
             )
 
             return role_arn

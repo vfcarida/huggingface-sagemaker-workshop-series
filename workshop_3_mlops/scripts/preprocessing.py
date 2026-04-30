@@ -45,8 +45,12 @@ if __name__ == "__main__":
         return tokenizer(batch["text"], padding="max_length", truncation=True)
 
     # load dataset
-    train_dataset, test_dataset = load_dataset(args.dataset_name, split=["train", "test"])
-    test_dataset = test_dataset.shuffle().select(range(1000))  # smaller the size for test dataset to 1k
+    train_dataset, test_dataset = load_dataset(
+        args.dataset_name, split=["train", "test"]
+    )
+    test_dataset = test_dataset.shuffle().select(
+        range(1000)
+    )  # smaller the size for test dataset to 1k
 
     # tokenize dataset
     train_dataset = train_dataset.map(tokenize, batched=True)

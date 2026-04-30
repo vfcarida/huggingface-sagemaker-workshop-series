@@ -35,7 +35,6 @@ class DistillationTrainer(Trainer):
         self.teacher.eval()
 
     def compute_loss(self, model, inputs, return_outputs=False):
-
         # compute student output
         outputs_student = model(**inputs)
         student_loss = outputs_student.loss
@@ -58,7 +57,6 @@ class DistillationTrainer(Trainer):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
 
     # hyperparameters sent by the client are passed as command-line arguments to the script.
@@ -104,7 +102,9 @@ if __name__ == "__main__":
     sample = "This is a basic example, with different words to test."
 
     # assert results
-    assert tokenizer(sample) == student_tokenizer(sample), "Tokenizers are not compatible"
+    assert tokenizer(sample) == student_tokenizer(
+        sample
+    ), "Tokenizers are not compatible"
 
     # load datasets
     dataset = load_dataset(args.dataset_id, args.dataset_config)
@@ -205,12 +205,16 @@ if __name__ == "__main__":
         def hp_space(trial):
             return {
                 "num_train_epochs": trial.suggest_int("num_train_epochs", 2, 10),
-                "learning_rate": trial.suggest_float("learning_rate", 1e-5, 1e-3, log=True),
+                "learning_rate": trial.suggest_float(
+                    "learning_rate", 1e-5, 1e-3, log=True
+                ),
                 "alpha": trial.suggest_float("alpha", 0, 1),
                 "temperature": trial.suggest_int("temperature", 2, 30),
             }
 
-        best_run = trainer.hyperparameter_search(n_trials=args.n_trials, direction="maximize", hp_space=hp_space)
+        best_run = trainer.hyperparameter_search(
+            n_trials=args.n_trials, direction="maximize", hp_space=hp_space
+        )
 
         # print best run
         print(best_run)

@@ -7,11 +7,15 @@ import time
 import numpy as np
 import torch
 from datasets import load_from_disk, load_metric
-from transformers import AutoModelForSequenceClassification, AutoTokenizer, Trainer, TrainingArguments
+from transformers import (
+    AutoModelForSequenceClassification,
+    AutoTokenizer,
+    Trainer,
+    TrainingArguments,
+)
 from transformers.trainer_utils import get_last_checkpoint
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
 
     # hyperparameters sent by the client are passed as command-line arguments to the script.
@@ -30,10 +34,14 @@ if __name__ == "__main__":
     parser.add_argument("--hub_token", type=str, default=None)
 
     # Data, model, and output directories
-    parser.add_argument("--output_data_dir", type=str, default=os.environ["SM_OUTPUT_DATA_DIR"])
+    parser.add_argument(
+        "--output_data_dir", type=str, default=os.environ["SM_OUTPUT_DATA_DIR"]
+    )
     parser.add_argument("--output_dir", type=str, default=os.environ["SM_MODEL_DIR"])
     parser.add_argument("--n_gpus", type=str, default=os.environ["SM_NUM_GPUS"])
-    parser.add_argument("--training_dir", type=str, default=os.environ["SM_CHANNEL_TRAIN"])
+    parser.add_argument(
+        "--training_dir", type=str, default=os.environ["SM_CHANNEL_TRAIN"]
+    )
     parser.add_argument("--test_dir", type=str, default=os.environ["SM_CHANNEL_TEST"])
 
     args, _ = parser.parse_known_args()
@@ -90,7 +98,9 @@ if __name__ == "__main__":
     # define training args
     training_args = TrainingArguments(
         output_dir=args.output_dir,
-        overwrite_output_dir=True if get_last_checkpoint(args.output_dir) is not None else False,
+        overwrite_output_dir=True
+        if get_last_checkpoint(args.output_dir) is not None
+        else False,
         num_train_epochs=args.epochs,
         per_device_train_batch_size=args.train_batch_size,
         per_device_eval_batch_size=args.eval_batch_size,

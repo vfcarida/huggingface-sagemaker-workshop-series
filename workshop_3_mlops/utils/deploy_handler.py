@@ -16,7 +16,9 @@ def lambda_handler(event, context):
 
     container = {"ModelPackageName": model_package_arn}
 
-    create_model_respose = sm_client.create_model(ModelName=model_name, ExecutionRoleArn=role, Containers=[container])
+    create_model_respose = sm_client.create_model(
+        ModelName=model_name, ExecutionRoleArn=role, Containers=[container]
+    )
 
     create_endpoint_config_response = sm_client.create_endpoint_config(
         EndpointConfigName=endpoint_config_name,

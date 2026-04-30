@@ -7,11 +7,15 @@ import time
 
 import numpy as np
 from datasets import load_dataset, load_metric
-from transformers import AutoModelForSequenceClassification, AutoTokenizer, Trainer, TrainingArguments
+from transformers import (
+    AutoModelForSequenceClassification,
+    AutoTokenizer,
+    Trainer,
+    TrainingArguments,
+)
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
 
     # hyperparameters sent by the client are passed as command-line arguments to the script.
@@ -63,7 +67,6 @@ if __name__ == "__main__":
         predictions = np.argmax(predictions, axis=1)
         return metric.compute(predictions=predictions, references=labels)
 
-
     # create label2id, id2label dicts for nice outputs for the model
     labels = tokenized_datasets["train"].features["labels"].names
     num_labels = len(labels)
@@ -76,7 +79,7 @@ if __name__ == "__main__":
     model = AutoModelForSequenceClassification.from_pretrained(
         args.model_id, num_labels=num_labels, label2id=label2id, id2label=id2label
     )
-        
+
     # define training args
     output_dir = Path("/opt/ml/output/data")
     training_args = TrainingArguments(
@@ -132,6 +135,6 @@ if __name__ == "__main__":
         # wait for asynchronous pushes to finish
         time.sleep(180)
         trainer.push_to_hub()
-        
+
     # Saves the model to s3 uses os.environ["SM_MODEL_DIR"] to make sure checkpointing works
     trainer.save_model(os.environ["SM_MODEL_DIR"])

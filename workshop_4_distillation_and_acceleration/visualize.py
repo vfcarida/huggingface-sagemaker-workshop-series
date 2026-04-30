@@ -1,8 +1,20 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from typing import Dict, Any
 
 
-def plot_metrics(perf_metrics, current_optim_type):
+def plot_metrics(
+    perf_metrics: Dict[str, Dict[str, Any]], current_optim_type: str
+) -> None:
+    """
+    Plots the performance metrics (Accuracy vs. Latency) for different models.
+    The current optimization type is highlighted with a dashed circle.
+
+    Args:
+        perf_metrics (Dict[str, Dict[str, Any]]): Dictionary containing the metrics
+                                                  for each model/optimization type.
+        current_optim_type (str): The optimization type to highlight in the plot.
+    """
     df = pd.DataFrame.from_dict(perf_metrics, orient="index")
 
     for idx in df.index:
@@ -15,10 +27,16 @@ def plot_metrics(perf_metrics, current_optim_type):
                 alpha=0.5,
                 s=df_opt["size_mb"],
                 label=idx,
-                marker="$\u25CC$",
+                marker="$\\u25CC$",
             )
         else:
-            plt.scatter(df_opt["time_p99_ms"], df_opt["accuracy"] * 100, s=df_opt["size_mb"], label=idx, alpha=0.5)
+            plt.scatter(
+                df_opt["time_p99_ms"],
+                df_opt["accuracy"] * 100,
+                s=df_opt["size_mb"],
+                label=idx,
+                alpha=0.5,
+            )
 
     legend = plt.legend(bbox_to_anchor=(1, 1))
     for handle in legend.legendHandles:
@@ -26,8 +44,10 @@ def plot_metrics(perf_metrics, current_optim_type):
 
     plt.ylim(80, 100)
     # Use the slowest model to define the x-axis range
-    xlim = int(perf_metrics["roberta-large"]["time_p99_ms"] + 30)
+    xlim = int(perf_metrics.get("roberta-large", {}).get("time_p99_ms", 100) + 30)
     plt.xlim(0, xlim)
     plt.ylabel("Accuracy (%)")
     plt.xlabel("p99 latency (ms)")
+    plt.title("Model Performance: Accuracy vs Latency")
+    plt.grid(True, linestyle="--", alpha=0.6)
     plt.show()
